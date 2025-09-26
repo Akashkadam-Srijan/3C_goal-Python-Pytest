@@ -1,0 +1,17 @@
+{
+  "data" : [
+    {
+      "username" : "rahulshettyacademy",
+      "password" : "learning",
+      "productName" : "Blackberry"
+    },
+
+     {
+      "username" : "rahulshettyacademy",
+      "password" : "learning",
+      "productName" : "Samsung Note 8"
+    }
+
+  ]
+
+}
