@@ -1,12 +1,14 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from Python_Pytest.utils.browserUtils import BrowserUtils
 
 
 class CheckoutConfirmation:
 
     def __init__(self,driver):
         self.driver =  driver
+        self.utils = BrowserUtils(driver)
         self.checkout_button = (By.XPATH, "//button[@class = 'btn btn-success']")
         self.enter_address = (By.XPATH, "//input[@id='country']")
         self.select_address = (By.XPATH, "//a[text()='India']")
@@ -36,10 +38,13 @@ class CheckoutConfirmation:
         #  Click on Purchase
         self.driver.find_element(*self.checkbox).click()
         submit_Button = self.driver.find_element(*self.click_submit_button)
-        print("Background-color", submit_Button.value_of_css_property("background-color"))
-        print("Color", submit_Button.value_of_css_property("color"))
-        print("Font-size", submit_Button.value_of_css_property("font-size"))
-        print("Font-size", submit_Button.value_of_css_property("font-weight"))
+        # print("Background-color", submit_Button.value_of_css_property("background-color"))
+        # print("Color", submit_Button.value_of_css_property("color"))
+        # print("Font-size", submit_Button.value_of_css_property("font-size"))
+        # print("Font-size", submit_Button.value_of_css_property("font-weight"))
+        self.utils.print_css_properties(submit_Button)
+        print("**********", submit_Button.text)
+        assert submit_Button.is_displayed()
         if submit_Button.is_displayed():
             submit_Button.click()
 
