@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-
+from Python_Pytest.utils.browserUtils import BrowserUtils
 from Python_Pytest.PageObject.checkout_confirmation import CheckoutConfirmation
 
 
@@ -7,6 +7,7 @@ class ShopPage:
 
     def __init__(self,driver):
         self.driver = driver
+        self.utils = BrowserUtils(driver)
         self.shop_button = (By.LINK_TEXT, "Shop")
         self.select_product = (By.XPATH, "//div[@class='card h-100']")
         self.check_out_Button = (By.CSS_SELECTOR, "a[class*='btn-primary']")
@@ -27,10 +28,12 @@ class ShopPage:
     def goToCart(self):
         # 3. Click on Checkout button
         checkout_button = self.driver.find_element(*self.check_out_Button)
-        print("Background-color", checkout_button.value_of_css_property("background-color"))
-        print("Color", checkout_button.value_of_css_property("color"))
-        print("Font-size", checkout_button.value_of_css_property("font-size"))
-        print(checkout_button.text)
+        # print("Background-color", checkout_button.value_of_css_property("background-color"))
+        # print("Color", checkout_button.value_of_css_property("color"))
+        # print("Font-size", checkout_button.value_of_css_property("font-size"))
+        # use the reusable helper from BrowserUtils
+        self.utils.print_css_properties(checkout_button)
+        print("*********",checkout_button.text)
         assert checkout_button.is_displayed()
         if checkout_button.is_displayed():
             checkout_button.click()
